@@ -113,4 +113,87 @@ The following software was installed and used during the laboratory setup.
 
 **Note:** The NAT Network DHCP server was disabled during configuration because its address (`10.0.0.2`) conflicted with the static IP required for the Kali virtual machine. Kali was subsequently configured manually.
 
+## 6. Network Architecture and Configuration
+
+### 6.1 Network Overview
+
+The laboratory uses Oracle VirtualBox's NAT Network feature to provide network connectivity to the Kali Linux virtual machine.
+
+A dedicated NAT Network named `NatNetwork` was created using the IPv4 subnet `10.0.0.0/24`.
+
+The Kali virtual machine was assigned a static IPv4 address of `10.0.0.2/24`, with `10.0.0.1` configured as its default gateway.
+
+### 6.2 Network Topology
+
+The following diagram illustrates the laboratory's network structure.
+
+```mermaid
+flowchart TD
+    A["Windows 11 Pro Host"] --> B["Oracle VirtualBox"]
+    B --> C["NatNetwork<br/>10.0.0.0/24"]
+    C --> D["Virtual Gateway<br/>10.0.0.1"]
+    C --> E["Kali Linux VM<br/>10.0.0.2/24"]
+    D --> F["External Network / Internet"]
+```
+
+### 6.3 IP Addressing Scheme
+
+| Parameter       | Configuration |
+| --------------- | ------------- |
+| Network Name    | NatNetwork    |
+| Network Type    | NAT Network   |
+| IPv4 Network    | 10.0.0.0/24   |
+| Subnet Mask     | 255.255.255.0 |
+| Network Address | 10.0.0.0      |
+| Default Gateway | 10.0.0.1      |
+| Kali Linux IP   | 10.0.0.2      |
+| DNS Server 1    | 8.8.8.8       |
+| DNS Server 2    | 1.1.1.1       |
+| DHCP Server     | Disabled      |
+
+### 6.4 Kali Linux Network Configuration
+
+The Kali virtual machine was configured with a static IPv4 address using NetworkManager's command-line utility (`nmcli`).
+
+The following commands were executed:
+
+**Step 1: Configure the static IP address, gateway and DNS servers.**
+
+```bash
+sudo nmcli connection modify "Wired connection 1" ipv4.method manual ipv4.addresses 10.0.0.2/24 ipv4.gateway 10.0.0.1 ipv4.dns "8.8.8.8 1.1.1.1"
+```
+
+**Step 2: Deactivate the network connection.**
+
+```bash
+sudo nmcli connection down "Wired connection 1"
+```
+
+**Step 3: Reactivate the network connection.**
+
+```bash
+sudo nmcli connection up "Wired connection 1"
+```
+
+**Step 4: Verify the assigned IP address.**
+
+```bash
+ip -4 addr show eth0
+```
+
+The expected address is:
+
+```text
+10.0.0.2/24
+```
+
+### 6.5 DHCP Configuration
+
+During the initial network configuration, the VirtualBox DHCP server was using `10.0.0.2` as its own address.
+
+This conflicted with the static IP address required for the Kali virtual machine.
+
+To resolve the conflict, DHCP was disabled on `NatNetwork`. The Kali virtual machine was then configured manually with the required static IP address.
+
+This configuration was verified through successful network connectivity tests.
 
