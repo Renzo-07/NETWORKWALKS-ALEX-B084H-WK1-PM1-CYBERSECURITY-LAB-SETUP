@@ -197,3 +197,56 @@ To resolve the conflict, DHCP was disabled on `NatNetwork`. The Kali virtual mac
 
 This configuration was verified through successful network connectivity tests.
 
+## 7. Installation and Deployment Procedure
+
+This section documents the installation and deployment of the software and virtual machine components used in the laboratory.
+
+### 7.1 Installation of 7-Zip
+
+7-Zip was installed on the Windows host to extract the compressed Kali Linux virtual machine archive.
+
+* Software: 7-Zip
+* Version: 26.02
+* Official website: https://www.7-zip.org/
+
+The installation was completed successfully.
+
+### 7.2 Installation of Oracle VirtualBox
+
+Oracle VirtualBox was installed as the hypervisor used to create and manage the virtual machines.
+
+* Software: Oracle VM VirtualBox
+* Version: 7.2.22
+* Official website: https://www.virtualbox.org/
+
+VirtualBox provides the virtualization environment required to run Kali Linux independently of the host operating system.
+
+### 7.3 Creation of the NAT Network
+
+A NAT Network named `NatNetwork` was created through the VirtualBox network configuration interface.
+
+The following settings were applied:
+
+| Setting      | Value       |
+| ------------ | ----------- |
+| Network Name | NatNetwork  |
+| Network Type | NAT Network |
+| IPv4 Prefix  | 10.0.0.0/24 |
+| Gateway      | 10.0.0.1    |
+
+The network was configured to provide internet connectivity to virtual machines connected to it.
+
+### 7.4 Download and Import of Kali Linux
+
+The prebuilt Kali Linux VirtualBox image was downloaded from the official Kali Linux website.
+
+The downloaded archive was:
+
+`kali-linux-2026.3-virtualbox-amd64.7z`
+
+**Deployment procedure:**
+
+1. The downloaded archive was extracted using 7-Zip.
+2. The extracted directory containing the VirtualBox configuration file (`.vbox`) and virtual disk (`.vdi`) was located.
+3. The `.vbox` configuration file was added to VirtualBox using the machine registration process.
+4. The Kali Linux virtual machine was successfully registered and made available
