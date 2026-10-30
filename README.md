@@ -249,4 +249,56 @@ The downloaded archive was:
 1. The downloaded archive was extracted using 7-Zip.
 2. The extracted directory containing the VirtualBox configuration file (`.vbox`) and virtual disk (`.vdi`) was located.
 3. The `.vbox` configuration file was added to VirtualBox using the machine registration process.
-4. The Kali Linux virtual machine was successfully registered and made available
+4. The Kali Linux virtual machine was successfully registered and made available in VirtualBox Manager.
+
+Initial Import Issue: Duplicate UUID
+
+During the initial deployment, VirtualBox returned a duplicate UUID error.
+
+This occurred because the virtual machine was already registered or had an existing registration that conflicted with the new import attempt.
+
+Resolution:
+
+The existing duplicate VM entry was removed using the Remove Only option. This removed the registration without deleting the virtual machine files.
+
+The .vbox configuration file was subsequently added successfully.
+
+7.5 Kali Linux Virtual Machine Configuration
+
+After registration, the Kali Linux VM was configured with the following settings:
+
+Network Adapter 1 was attached to NatNetwork.
+The virtual machine was assigned the required network configuration.
+Shared Clipboard was configured as Bidirectional.
+Drag and Drop was configured as Bidirectional.
+7.6 Shared Folder Configuration
+
+A shared folder was configured to provide access to files stored in the Windows host's Downloads directory.
+
+The shared folder was configured through:
+
+VirtualBox VM Settings → Shared Folders
+
+The following options were used:
+
+Auto-mount: Enabled.
+Read-only: Disabled.
+Shared folder access: Bidirectional file access.
+
+The shared directory appeared inside Kali Linux as:
+
+/media/sf_Downloads
+
+Its contents were successfully accessed from Kali Linux.
+
+7.7 Baseline Snapshot Creation
+
+After the initial configuration, the Kali Linux virtual machine was shut down properly.
+
+A baseline snapshot was created through VirtualBox Manager.
+
+Snapshot name:
+
+WK1-PM1-Base-Setup-Complete
+
+The snapshot preserves the initial configured state of the virtual machine and provides a restore point for future laboratory activities.
