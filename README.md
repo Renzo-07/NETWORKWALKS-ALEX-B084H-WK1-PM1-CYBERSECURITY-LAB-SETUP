@@ -69,3 +69,48 @@ All security testing and network experiments will be conducted within controlled
 
 No systems, networks or devices will be tested without appropriate authorization.
 
+## 5. Hardware and Software Specifications
+
+### 5.1 Host Machine Specifications
+
+The cybersecurity laboratory was deployed on a Lenovo V14 laptop running Windows 11 Pro.
+
+| Component          | Specification             |
+| ------------------ | ------------------------- |
+| Device             | Lenovo V14                |
+| Operating System   | Windows 11 Pro            |
+| Processor          | Intel Core i7             |
+| CPU Cores          | 10                        |
+| Logical Processors | 16                        |
+| Installed RAM      | 16 GB                     |
+| Available Storage  | 319 GB (at time of setup) |
+
+### 5.2 Software Requirements
+
+The following software was installed and used during the laboratory setup.
+
+| Software          | Version | Purpose                                           |
+| ----------------- | ------- | ------------------------------------------------- |
+| 7-Zip             | 26.02   | Extracting the Kali Linux virtual machine archive |
+| Oracle VirtualBox | 7.2.22  | Virtualization and virtual machine management     |
+| Kali Linux        | 2026.3  | Primary cybersecurity testing environment         |
+| Windows 11 Pro    | Host OS | Operating system running VirtualBox               |
+
+### 5.3 Virtual Machine Specifications
+
+| Configuration       | Value             |
+| ------------------- | ----------------- |
+| Virtual Machine     | Kali Linux 2026.3 |
+| Hypervisor          | Oracle VirtualBox |
+| Network Adapter     | Adapter 1         |
+| Network Attachment  | NAT Network       |
+| NAT Network Name    | NatNetwork        |
+| Network CIDR        | 10.0.0.0/24       |
+| Assigned IP Address | 10.0.0.2/24       |
+| Default Gateway     | 10.0.0.1          |
+| Preferred DNS       | 8.8.8.8           |
+| Alternate DNS       | 1.1.1.1           |
+
+**Note:** The NAT Network DHCP server was disabled during configuration because its address (`10.0.0.2`) conflicted with the static IP required for the Kali virtual machine. Kali was subsequently configured manually.
+
+
